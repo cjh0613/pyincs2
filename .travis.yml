@@ -17,7 +17,7 @@ install:
   - pip install pyinstaller
 # command to run tests
 script:
-  - pyinstaller getQQfriends.py
+  - c:\programdata\chocolatey\lib\python3-x86_32\tools\Scripts\pyinstaller.exe -F getQQfriends.py
   - cd dist
   - git init
   - git add -A
