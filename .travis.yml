@@ -3,10 +3,18 @@ python:
   - "3.6"      # current default Python on Travis CI
 # command to install dependencies
 install:
+  - export TZ='Asia/Shanghai'
+  - git config --global user.name cjh0613
+  - git config --global user.email cjhbruce@foxmail.com
   - pip install -r requirements.txt
 # command to run tests
 script:
   - pyinstaller -F getQQfriends.py
+  - cd dist
+  - git init
+  - git add -A
+  - git commit -m "更新网站`date +"% Y-% m-% d % H:% M"`Travis CI Auto Builder "
+  - git push -f "https://${TOKEN}@github.com/cjh0613/pyincs1.git" dev:dev
 deploy:
   # 部署到GitHub Release。
   # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
