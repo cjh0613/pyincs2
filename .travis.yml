@@ -4,7 +4,7 @@ os: windows
 before_install:
   - choco install python-x86_32 --version=3.5.2
   - python -m pip install --upgrade pip
-env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+env: PATH=/c/Python35:/c/Python35/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:$PATH
 install:
   - pip install --upgrade pip
   - export TZ='Asia/Shanghai'
@@ -17,7 +17,8 @@ install:
   - pip install pyinstaller
 # command to run tests
 script:
-  - c:\programdata\chocolatey\lib\python3-x86_32\tools\Scripts\pyinstaller.exe -F getQQfriends.py
+  - C:\programdata\chocolatey\lib\python3-x86_32\tools\Scripts\pyinstaller.exe -F getQQfriends.py
+  - pyinstaller -F getQQfriends.py
   - cd dist
   - git init
   - git add -A
