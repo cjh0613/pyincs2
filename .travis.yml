@@ -17,3 +17,5 @@ deploy:
   file: dist
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
+  on:
+    all_branches: true
