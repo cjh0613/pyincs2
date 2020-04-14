@@ -7,3 +7,13 @@ install:
 # command to run tests
 script:
   - pyinstaller -F getQQfriends.py
+deploy:
+  # 部署到GitHub Release。
+  # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+  provider: releases
+  # Github oauth token
+  api_key: ${TOKEN}
+  # 部署文件路径；对于Android就部署生成的 apk 文件
+  file: dist
+  # 避免 Travis CI在部署之前清空生成的APK文件
+  skip_cleanup: true
