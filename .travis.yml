@@ -27,3 +27,7 @@ deploy:
   skip_cleanup: true
   on:
     all_branches: true
+branches:
+  only:
+    - master
+    - dev
