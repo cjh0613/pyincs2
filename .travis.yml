@@ -10,7 +10,10 @@ install:
   - export TZ='Asia/Shanghai'
   - git config --global user.name cjh0613
   - git config --global user.email cjhbruce@foxmail.com
-  - pip install -r requirements.txt
+  - pip install selenium
+  - pip install beautifulsoup4
+  - pip install lxml
+  - pip install openpyxl
 # command to run tests
 script:
   - pyinstaller -F getQQfriends.py
