@@ -17,7 +17,7 @@ install:
   - pip install pyinstaller
 # command to run tests
 script:
-  - pyinstaller -F getQQfriends.py -i "xzxs.ico"
+  - pyinstaller -F 1.py -i "xzxs.ico"
   - cd dist
   - git init
   - git add -A
