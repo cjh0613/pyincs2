@@ -6,4 +6,4 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - pyinstall -F 获取QQ好友列表.py
+  - pyinstaller -F 获取QQ好友列表.py
