@@ -17,7 +17,7 @@ install:
   - pip install pyinstaller
 # command to run tests
 script:
-  - pyinstaller -F getQQfriends.py
+  - pyinstaller getQQfriends.py
   - cd dist
   - git init
   - git add -A
@@ -38,4 +38,3 @@ deploy:
 branches:
   only:
     - master
-    - dev
