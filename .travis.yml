@@ -1,0 +1,37 @@
+language: shell
+os: windows
+# command to install dependencies
+before_install:
+  - choco install python-x86_32 --version=3.5.2
+  - python -m pip install --upgrade pip
+env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+install:
+  - pip install --upgrade pip
+  - export TZ='Asia/Shanghai'
+  - git config --global user.name cjh0613
+  - git config --global user.email cjhbruce@foxmail.com
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - pyinstaller -F getQQfriends.py
+  - cd dist
+  - git init
+  - git add -A
+  - git commit -m "更新网站`date +"% Y-% m-% d % H:% M"`Travis CI Auto Builder "
+  - git push -f "https://cjh0613:${TOKEN}@github.com/cjh0613/pyincs1.git" master:dev
+deploy:
+  # 部署到GitHub Release。
+  # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+  provider: releases
+  # Github oauth token
+  api_key: ${TOKEN}
+  # 部署文件路径；对于Android就部署生成的 apk 文件
+  file: ./dist/getQQfriends.exe
+  # 避免 Travis CI在部署之前清空生成的APK文件
+  skip_cleanup: true
+  on:
+    all_branches: true
+branches:
+  only:
+    - master
+    - dev
