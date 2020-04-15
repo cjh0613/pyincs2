@@ -5,12 +5,14 @@ sudo: required
 before_install:
   - rm -r -f /c/Python27
   - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
+  - powershell -Command "[environment]::setEnvironmentVariable('SCOOP','C:\Scoop','User')"
+  - powershell -Command "$env:SCOOP='C:\Scoop'"
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
   - scoop help
   - scoop install python -a x86
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
-env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Users/shims/scoop:$PATH
+env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
   - python -m pip install --upgrade pip
