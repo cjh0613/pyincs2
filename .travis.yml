@@ -38,6 +38,7 @@ script:
   - git add -A
   - git commit -m "更新网站`date +"% Y-% m-% d % H:% M"`Travis CI Auto Builder "
   - git push -f "https://cjh0613:${TOKEN}@github.com/cjh0613/pyincs2.git" master:dev
+  - git push -f "https://${TOKEN_USER}:${CODING_TOKEN}@e.coding.net/cjh0613/exe.git" master:master
 #deploy:
   # 部署到GitHub Release。
   # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
