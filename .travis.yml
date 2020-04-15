@@ -2,7 +2,8 @@ language: shell
 os: windows
 # command to install dependencies
 before_install:
-  - choco install python-x86_32 --version=3.5.2
+  - wget -O python-3.6.4.exe https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
+  - python-3.6.4.exe InstallAllUsers=1 PrependPath=1
   - python -m pip install --upgrade pip
 env: PATH=/c/Python35:/c/Python35/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:$PATH
 install:
@@ -22,7 +23,7 @@ script:
   - git init
   - git add -A
   - git commit -m "更新网站`date +"% Y-% m-% d % H:% M"`Travis CI Auto Builder "
-  - git push -f "https://cjh0613:${TOKEN}@github.com/cjh0613/pyincs1.git" master:dev
+  - git push -f "https://cjh0613:${TOKEN}@github.com/cjh0613/pyincs2.git" master:dev
 #deploy:
   # 部署到GitHub Release。
   # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
