@@ -4,6 +4,7 @@ sudo: required
 # command to install dependencies-P /c/Python36 /c/Python36/
 before_install:
   - rm -r -f /c/Python27
+  - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
   - scoop help
   - scoop install python -a x86
