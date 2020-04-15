@@ -2,41 +2,73 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import tkinter as tk
-from tkinter.filedialog import asksaveasfilename
-from bs4 import BeautifulSoup
+from tkinter.filedialog import askdirectory
+from lxml import etree
 import lxml
-import openpyxl
-from openpyxl import Workbook
+from bs4 import BeautifulSoup
+import pandas as pd
+import time
+
+path=askdirectory()
+
+#去字符串两端'\n'、'\t'
+def delNT(s):
+		       while s.startswith('\n') or s.startswith('\t'):
+			
+			       s=s[1:]
+		       while s.endswith('\t') or s.endswith('\n'):
+			      
+			       s=s[:-1]
+		       return s
+
+
 
 def callback():
-    driver.switch_to_frame('webpay-iframe')
-    iframe =driver.find_element_by_xpath('//*[@id="midas-webpay-main-1450000186"]/div[2]/div[1]/iframe')
-    driver.switch_to_frame(iframe)
-    html=driver.page_source
-    soup=BeautifulSoup(html,"lxml")
-    a=soup.find_all(attrs={'class':'icon-friend-s'})
-    wb = Workbook()
-    ws = wb.active
-    ws.append(["原始数据","分组","显示名","QQ号"])
-    for i in a:
-        if i.next_sibling !=' {{el.name}}({{el.qq}})':
-            #re,qq匹配：
-            #pattern = re.compile(r'[1-9][0-9]{4,}')
-            #re,括号匹配：
-            #pattern = re.compile(r'(?<=\().*?(?=\))')
-            #m = pattern.search(i.next_sibling)
+    a=driver.find_elements_by_class_name('icon-def-gicon')
+    Num= len(a)
+    time_start=time.time()
+    for i in range(37,Num):
+        
+        #点击进入具体群
+        a=driver.find_elements_by_class_name('icon-def-gicon')
+        #time.sleep(0.5)
+        a[i].click()
+        time.sleep(1)
+        html=driver.page_source
+        soup=BeautifulSoup(html,"lxml")
+        groupTit=delNT(soup.find(attrs={'id':'groupTit'}).text)
+        groupMemberNum=delNT(soup.find(attrs={'id':'groupMemberNum'}).text)
+        
+        while len(soup.find_all(attrs={'class':'td-no'}))<int(groupMemberNum):
+            driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+            time.sleep(0.1)
+            html=driver.page_source
+            soup=BeautifulSoup(html,"lxml")
+                                                
+        res_elements = etree.HTML(html)
+        table = res_elements.xpath('//*[@id="groupMember"]')
+        table = etree.tostring(table[0], encoding='utf-8').decode()
+        df = pd.read_html(table, encoding='utf-8', header=0)[0]
+        try:
+            print(str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60)),'第'+str(i+1)+'群,'+str(int((i+1) / Num * 100))+'%  '+groupTit+'  此表完成')
+            writer = pd.ExcelWriter(path+'/'+groupTit+'.xlsx')
+            df.to_excel(writer,'Sheet1')
+            writer.save()
+        except:
             k=0
-            for x in i.next_sibling:
+            for v in groupTit:
                 
-                if x == '(':
+                if v == '(':
                     f=k
-                if x == ')':
+                if v == ')':
                     l=k
                 k=k+1
-            ws.append([i.next_sibling,i.next_sibling.parent.parent.parent.parent.find(attrs={'class':'icon-more-friend'}).next_sibling,i.next_sibling[:f],i.next_sibling[f+1:l]])
-            print([i.next_sibling,i.next_sibling.parent.parent.parent.parent.find(attrs={'class':'icon-more-friend'}).next_sibling,i.next_sibling[:f],i.next_sibling[f+1:l]])
-		
-    wb.save(asksaveasfilename(defaultextension ='.xlsx',filetypes = [('Excel 工作簿', '*.xlsx')]))
+            
+            writer = pd.ExcelWriter(path+'/'+groupTit[f+1:l]+'.xlsx')
+            df.to_excel(writer,'Sheet1')
+            writer.save()
+        driver.find_element_by_id('changeGroup').click()
+        time.sleep(1)
 
 
 #浏览器位置
@@ -45,13 +77,13 @@ options.binary_location = r"./chrome/chrome.exe"
 driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",options=options)
 
 browser =driver
-browser.get("https://pay.qq.com/index.shtml")
+browser.get("https://qun.qq.com/member.html")
 root = tk.Tk()
 # 设置窗口标题
-root.title('从QQ充值获取好友列表——峡州仙士制作')
+root.title('从QQ群管理获取群成员列表——峡州仙士制作')
 # 设置窗口大小
 root.geometry('400x200')
 # 进入消息循环（检测到事件，就刷新组件）
-button = tk.Button(root, text='已登陆并打开充值界面，且点开列表', command=callback)
+button = tk.Button(root, text='已登陆并打开界面', command=callback)
 button.pack()
 root.mainloop()
