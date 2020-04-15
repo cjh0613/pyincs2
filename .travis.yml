@@ -1,11 +1,11 @@
 language: shell
 os: windows
 sudo: required
-# command to install dependencies
+# command to install dependencies-P /c/Python36 /c/Python36/
 before_install:
   - rm -r -f /c/Python27
-  - wget -O cjhpython.exe -P /c/Python36 https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
-  - /c/Python36/cjhpython.exe /quiet
+  - wget -O cjhpython.exe https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
+  - cjhpython.exe /quiet
   - python -m pip install --upgrade pip
 env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:$PATH
 install:
