@@ -6,15 +6,15 @@ before_install:
   - rm -r -f /c/Python27
   - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
-  - cd /c/Users/travis/
-  - ls -l
-  - cd /c/Users/travis/scoop
-  - ls -l
+  #- cd /c/Users/travis/
+  #- ls -l
+  #- cd /c/Users/travis/scoop/shims
+  #- ls -l
   - scoop help
   - scoop install python -a x86
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
-env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:%USERPROFILE%/Scoop:%USERPROFILE%/Scoop/shims:$PATH
+env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
   - python -m pip install --upgrade pip
