@@ -6,7 +6,7 @@ before_install:
   - rm -r -f /c/Python27
   - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
   - powershell -Command "[environment]::setEnvironmentVariable('SCOOP','C:\Scoop','User')"
-  - powershell -Command "$env:SCOOP='C:\Scoop'"
+  - powershell -Command "$env:SCOOP='/c/Scoop'"
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
   - scoop help
   - scoop install python -a x86
