@@ -4,7 +4,7 @@ sudo: required
 # command to install dependencies-P /c/Python36 /c/Python36/
 before_install:
   - rm -r -f /c/Python27
-  - pwsh -f "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
+  - powershell -f "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
   - scoop help
   - scoop install python -a x86
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
