@@ -2,7 +2,7 @@ language: shell
 os: windows
 # command to install dependencies
 before_install:
-  - python -V
+  - python3 -V
   - wget -O cjhpython.exe -P /c/Python36 https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
   - cjhpython PrependPath=1
   - python -m pip install --upgrade pip
