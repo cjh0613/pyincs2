@@ -15,7 +15,7 @@ before_install:
   - python -V
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
-env: PATH=/c/Users/travis/scoop/apps/python/3.8.2:/c/Users/travis/scoop/apps/python/3.8.2/Scripts:/c/Users/travis/scoop/apps/python/3.8.2/Tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
+env: PATH=/c/Users/travis/scoop/apps/python/current:/c/Users/travis/scoop/apps/python/current/Scripts:/c/Users/travis/scoop/apps/python/current/Tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
   
