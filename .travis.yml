@@ -1,5 +1,6 @@
 language: shell
 os: windows
+sudo: required
 # command to install dependencies
 before_install:
   - rm -r -f /c/Python27
