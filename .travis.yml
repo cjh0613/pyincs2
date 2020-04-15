@@ -12,11 +12,18 @@ before_install:
   #- ls -l
   - scoop help
   - scoop install python -a x86
+  - python -V
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
 env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
+  - cd /c/Users/travis/
+  - ls -l
+  - cd /c/Users/travis/scoop/
+  - ls -l
+  - cd /c/Users/travis/scoop/shims
+  - ls -l
   - python -m pip install --upgrade pip
   - pip install --upgrade pip
   - export TZ='Asia/Shanghai'
