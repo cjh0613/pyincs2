@@ -8,6 +8,8 @@ before_install:
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
   - cd /c/Users/travis/
   - ls -l
+  - cd /c/Users/travis/scoop
+  - ls -l
   - scoop help
   - scoop install python -a x86
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
