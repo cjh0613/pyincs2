@@ -18,10 +18,6 @@ before_install:
 env: PATH=/c/Python38:/c/Python38/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Users/travis/scoop/shims:/c/Users/travis/scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
-  - cd /c/Program Files
-  - ls -l
-  - cd /c/Program Files (x86)
-  - ls -l
   - cd /c/ProgramData
   - ls -l
   - cd /c/Users/travis/AppData/Local
