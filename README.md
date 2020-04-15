@@ -1,6 +1,8 @@
 # pyincs2
 自动生成 峡州仙士ico python36 win32 exe
 
+访问地址 http://qa7nkm.coding-pages.com/1.exe
+
 [![Build Status](https://travis-ci.org/cjh0613/pyincs2.svg?branch=master)](https://travis-ci.org/cjh0613/pyincs2)
 
 [![GitHub stars](https://img.shields.io/github/stars/cjh0613/pyincs2.svg?style=social)](https://github.com/cjh0613/pyincs2/stargazers)     [![GitHub forks](https://img.shields.io/github/forks/cjh0613/pyincs2.svg?style=social)](https://github.com/cjh0613/pyincs2/network/members)  `请点击页面顶部靠右star与fork`
