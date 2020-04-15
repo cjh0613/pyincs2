@@ -6,7 +6,7 @@ before_install:
   - rm -r -f /c/Python27
   - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
   - powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
-  - cd /c/Users
+  - cd /c/Users/travis/
   - ls -l
   - scoop help
   - scoop install python -a x86
