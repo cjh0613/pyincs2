@@ -2,8 +2,8 @@ language: shell
 os: windows
 # command to install dependencies
 before_install:
-  - wget -O python-3.6.4.exe https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
-  - python-3.6.4.exe InstallAllUsers=1 PrependPath=1
+  - wget -O python.exe https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
+  - python.exe InstallAllUsers=1 PrependPath=1
   - python -m pip install --upgrade pip
 env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:$PATH
 install:
