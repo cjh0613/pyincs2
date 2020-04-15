@@ -10,7 +10,7 @@ before_install:
   - scoop install python -a x86
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
-env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:$PATH
+env: PATH=/c/Python36:/c/Python36/Scripts:/c/programdata/chocolatey/lib/python3-x86_32/tools/Scripts:/c/Users/shims/scoop:$PATH
 install:
   #- ./python-3.6.4.exe InstallAllUsers=1 PrependPath=1
   - python -m pip install --upgrade pip
