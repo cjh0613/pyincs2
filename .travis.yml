@@ -11,7 +11,8 @@ before_install:
   #- cd /c/Users/travis/scoop/shims
   #- ls -l
   - scoop help
-  - scoop install python -a x86
+  - scoop install python@3.6.8 -a x86
+  - scoop hold python
   - python -V
   #- wget -O python-3.6.4.exe -nv https://www.python.org/ftp/python/3.6.4/python-3.6.4.exe 
 
