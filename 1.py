@@ -20,6 +20,7 @@ def CJHrandomS():
     return s
     
 def main():
+    global driver
     try:
         options=Options()
         options.binary_location = "./chrome/chrome.exe"
