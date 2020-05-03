@@ -102,12 +102,10 @@ def main():
     except:
         print('fail')
     driver.quit()
-main()
 
 i=1
 time_start=time.time()
 while 1:
-    
     main()
     print([str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))])
     print('次数：'+str(i))
