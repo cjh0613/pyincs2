@@ -25,10 +25,6 @@ install:
   - git config --global user.name cjh0613
   - git config --global user.email cjhbruce@foxmail.com
   - pip install selenium
-  - pip install beautifulsoup4
-  - pip install lxml
-  - pip install pandas
-  - pip install openpyxl
   - pip install pyinstaller
 # command to run tests
 script:
