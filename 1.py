@@ -12,10 +12,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 def CJHrandomS():
     s1=random.choice(['宜昌','宜昌市','湖北省宜昌市','湖北宜昌','湖北省宜昌','湖北宜昌市','三峡大学'])
-    a1=random.choice(['',' ','  '])
+    a1=random.choice(['','','','','','',' ','  '])
     s2=random.choice(['八中','8中','八中','第八中学','第八中','三峡大学附属中学','三峡大学附中'])
     a2=random.choice(['',' ',' ',' ','  '])
-    s3=random.choice(['官网','官方网站',])
+    s3=random.choice(['','','','','','','官网','官方网站',])
     s=s1+a1+s2+a2+s3
     return s
     
@@ -28,6 +28,7 @@ def main():
     #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
     options.add_argument('--headless')
+    options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
     options.add_argument('lang=zh_CN.UTF-8')
     u1=random.choice(['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
     # Opera
