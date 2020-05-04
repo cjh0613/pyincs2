@@ -28,7 +28,7 @@ def main():
     #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
     options.add_argument('--headless')
-    options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
+    #options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
     options.add_argument('lang=zh_CN.UTF-8')
     u1=random.choice(['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
     # Opera
