@@ -27,7 +27,7 @@ def main():
     options.executable_path="./chrome/chromedriver.exe"
     #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     #options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
     options.add_argument('lang=zh_CN.UTF-8')
     u1=random.choice(['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
@@ -73,11 +73,11 @@ def main():
     #browser =driver
 
     #driver.get("https://www.baidu.com/baidu?wd=宜昌八中官网&ie=utf-8")
-    s1=random.choice(['宜昌','宜昌市','湖北省宜昌市','湖北宜昌','湖北省宜昌','湖北宜昌市','三峡大学'])
+    s1=random.choice(['维基百科','Github','无法','代理网站','Pandownload','搜索引擎','JS API','Panda-Learning','zmirror','hexo bilibili','Python','IDE','资源分享','转','Wikipedia','PyInstaller','3D打印','科学上网','解决方案',' javascript','转载','nodejs','文件自动处理','',])
     a1=random.choice(['','','','','','','','',' ','  '])
-    s2=random.choice(['八中','8中','八中','第八中学','第八中','三峡大学附属中学','三峡大学附中'])
-    a2=random.choice(['','',' ',' ',' ','  '])
-    s3=random.choice(['','','','','','','','','官网','官方网站',])
+    s2=random.choice(['峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页','峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页',''])
+    a2=random.choice(['','',' ','','','','','','','','','','','','','','','','','','','','',' ',' ','  '])
+    s3=random.choice(['','','','','','','','','','','','','','','','','','','','','官网','官方网站',])
     s=s1+a1+s2+a2+s3
     # 获取输入框标签对象
     element = driver.find_element_by_id('kw')
@@ -94,10 +94,12 @@ def main():
     try:
 
         #driver.findElement(By.xpath("//*[@id="+n+"]/div[2]/a[1][contains(text(),'cjh0613.gitee.io')]"))
-        driver.find_element_by_partial_link_text("https://cjh0613.gitee.io").click()
+        driver.find_element_by_partial_link_text("https://cjh0613.").click()
         print ('成功点击！！！——————test pass: element found by link text')
         j=j+1
-        time.sleep(10)
+        cjht=random.choice(['1125','1825','3000','1125','1825','3000','20','60'])
+        print('等待'+cjht)
+        time.sleep(int(cjht))
         if tag1==0:
             driver.quit()
     except:
@@ -116,4 +118,3 @@ while 1:
     print([str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))])
     print(str(int(j / i * 100))+'%    '+'成功次数：'+str(j)+'    总次数：'+str(i))
     i=i+1
-
