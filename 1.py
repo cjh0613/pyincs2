@@ -24,7 +24,7 @@ def main():
     #try:
     options=Options()
     options.binary_location = "./chrome/chrome.exe"
-    options.executable_path="./chrome/chromedriver.exe"
+    #options.executable_path="./chrome/chromedriver.exe"
     #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
     #options.add_argument('--headless')
@@ -67,7 +67,7 @@ def main():
     UserAgent = u1
     options.add_argument('User-Agent=' + UserAgent)
     time_start=time.time()
-    driver=webdriver.Chrome(options=options)
+    driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",chrome_options=options)
     #driver=webdriver.Chrome(options=options)
     driver.get(random.choice(["http://www.baidu.com","https://www.baidu.com"]))
     #browser =driver
