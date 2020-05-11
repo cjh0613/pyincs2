@@ -30,8 +30,8 @@ install:
   - pip install pyinstaller
 # command to run tests
 script:
-  #- pyinstaller -F 1.py -i "xzxs.ico"
-  - pyinstaller -F 1.py -i "qq.ico"
+  - pyinstaller -F 1.py -i "xzxs.ico"
+  #- pyinstaller -F 1.py -i "qq.ico"
   - cd dist
   - git init
   - git add -A
