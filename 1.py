@@ -1,120 +1,93 @@
+import configparser
 import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os
 import time
-import random
+from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-def CJHrandomS():
-    s1=random.choice(['宜昌','宜昌市','湖北省宜昌市','湖北宜昌','湖北省宜昌','湖北宜昌市','三峡大学'])
-    a1=random.choice(['','','','','','',' ','  '])
-    s2=random.choice(['八中','8中','八中','第八中学','第八中','三峡大学附属中学','三峡大学附中'])
-    a2=random.choice(['',' ',' ',' ','  '])
-    s3=random.choice(['','','','','','','官网','官方网站',])
-    s=s1+a1+s2+a2+s3
-    return s
-    
+
+
+
 def main():
-    global j
-    #try:
+    print('''
+峡州仙士Gitee Page一键自动部署官方发布地址：
+    https://cjh0613.github.io/blog/20200511GiteePageAuto.html
+转载请遵守 BY-NC-SA 许可协议 ，注明出处！
+开始运行……
+（若无法成功自动部署请检查配置文件及网络连接）
+    ''')
+    time_start=time.time()
     options=Options()
     options.binary_location = "./chrome/chrome.exe"
-    #options.executable_path="./chrome/chromedriver.exe"
-    #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
-    #options.add_argument('--headless')
-    #options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
-    options.add_argument('lang=zh_CN.UTF-8')
-    u1=random.choice(['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
-    # Opera
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 OPR/26.0.1656.60",
-    "Opera/8.0 (Windows NT 5.1; U; en)",
-    "Mozilla/5.0 (Windows NT 5.1; U; en; rv:1.8.1) Gecko/20061208 Firefox/2.0.0 Opera 9.50",
-    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 9.50",
-    # Firefox
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0",
-    "Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10",
-    # Safari
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
-    # chrome
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11",
-    "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.133 Safari/534.16",
-    # 360
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    # 淘宝浏览器
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.11 TaoBrowser/2.0 Safari/536.11",
-    # 猎豹浏览器
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER",
-    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; LBBROWSER)",
-    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)",
-    # QQ浏览器
-    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)",
-    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)",
-    # sogou浏览器
-    "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0",
-    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SV1; QQDownload 732; .NET4.0C; .NET4.0E; SE 2.X MetaSr 1.0)",
-    # maxthon浏览器
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.3.4000 Chrome/30.0.1599.101 Safari/537.36",
-    # UC浏览器
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36"])
-    UserAgent = u1
-    options.add_argument('User-Agent=' + UserAgent)
-    time_start=time.time()
+    options.add_argument('--headless')
     driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",chrome_options=options)
-    #driver=webdriver.Chrome(options=options)
-    driver.get(random.choice(["http://www.baidu.com","https://www.baidu.com"]))
+    #  实例化configParser对象
+    config = configparser.ConfigParser()
+    # -read读取ini文件
+    config.read('config.ini', encoding='UTF-8')
     #browser =driver
+    driver.get("https://gitee.com/"+config.get('config', 'userName')+"/"+config.get('config', 'repoName')+"/pages")
+    condition = expected_conditions.visibility_of_element_located((By.ID, 'navbar-search-input'))
+    WebDriverWait(driver=driver, timeout=20, poll_frequency=0.5).until(condition)
+    time.sleep(0.5)
+    driver.find_element(By.LINK_TEXT, "登录").click()
+    condition = expected_conditions.visibility_of_element_located((By.ID, 'user_login'))
+    WebDriverWait(driver=driver, timeout=20, poll_frequency=0.5).until(condition)
+    driver.find_element(By.ID, "user_login").click()
+    driver.find_element(By.ID, "user_login").send_keys(config.get('config', 'loginName'))
+    time.sleep(0.5)
+    driver.find_element(By.ID, "user_password").click()
+    driver.find_element(By.ID, "user_password").send_keys(config.get('config', 'passWord'))
+    time.sleep(0.5)
+    driver.find_element(By.NAME, "commit").click()
+    
+    if config.get('config', 'pullGithub')=='1':
+        condition = expected_conditions.visibility_of_element_located((By.ID, 'btn-sync-from-github'))
+        WebDriverWait(driver=driver, timeout=20, poll_frequency=0.5).until(condition)
+        driver.find_element(By.ID, "btn-sync-from-github").click()
+        time.sleep(10)
+        try:
+            driver.find_element_by_xpath('//*[@id="modal-sync-from-github"]/div[3]/div[3]').click()
+            print('Gitee Page 从Github同步成功，耗时')
+            cjhCost=str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))
+            print([cjhCost])
+            # 等待5秒更新
+            time.sleep(5)
+        except:
+            date = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+            print('''
+    gitee同步出错！请速处理！
+    ''')
+    elif config.get('config', 'pullGithub')=='0':
+        time.sleep(5)
+        try:
+            # 点击更新按钮--通过xpath确定点击位置/html/body/div[3]/div[2]/div/div[2]/div[1]/form/div[7]
+            driver.find_element_by_xpath('//*[@id="pages-branch"]/div[7]').click()
+            # 确认更新提示框--这个函数的作用是确认提示框
+            Alert(driver).accept()
 
-    #driver.get("https://www.baidu.com/baidu?wd=宜昌八中官网&ie=utf-8")
-    s1=random.choice(['维基百科','Github','无法','代理网站','Pandownload','搜索引擎','JS API','Panda-Learning','zmirror','hexo bilibili','Python','IDE','资源分享','转','Wikipedia','PyInstaller','3D打印','科学上网','解决方案',' javascript','转载','nodejs','文件自动处理','',])
-    a1=random.choice(['','','','','','','','',' ','  '])
-    s2=random.choice(['峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页','峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页',''])
-    a2=random.choice(['','',' ','','','','','','','','','','','','','','','','','','','','',' ',' ','  '])
-    s3=random.choice(['','','','','','','','','','','','','','','','','','','','','官网','官方网站',])
-    s=s1+a1+s2+a2+s3
-    # 获取输入框标签对象
-    element = driver.find_element_by_id('kw')
-    # 输入框输入内容
-    element.send_keys(s)
-    element.send_keys(Keys.ENTER)
-    condition = expected_conditions.visibility_of_element_located((By.PARTIAL_LINK_TEXT, "https://cjh0613.gitee.io"))
-    try:
-        tag1=0
-        WebDriverWait(driver=driver, timeout=15, poll_frequency=1).until(condition)
-    except:
-        driver.quit()
-        tag1=1
-    try:
+            # 等待5秒更新
+            time.sleep(5)
 
-        #driver.findElement(By.xpath("//*[@id="+n+"]/div[2]/a[1][contains(text(),'cjh0613.gitee.io')]"))
-        driver.find_element_by_partial_link_text("https://cjh0613.").click()
-        print ('成功点击！！！——————test pass: element found by link text')
-        j=j+1
-        cjht=random.choice(['1125','1825','3000','1125','1825','3000','20','60'])
-        print('等待'+cjht)
-        time.sleep(int(cjht))
-        if tag1==0:
-            driver.quit()
-    except:
-        print ("Exception found")
-        if tag1==0:
-            driver.quit()
-#except:
-    #print('fail')
-    #driver.quit()
+            # 这个print其实没事什么用,如果真的要测试脚本是否运行成功，可以用try来抛出异常
+            print("Gitee Page Deploy成功，耗时")
+            cjhCost=str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))
+            print([cjhCost])
+        except:
+            date = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+            print('''
+    gitee deploy出错！请速处理！
+    ''')
+    else:
+         print('''
+    pullGithub 参数设置不正确！请速处理！
+    ''')
+    driver.quit()
+main()
 
-i=1
-j=0
-time_start=time.time()
-while 1:
-    main()
-    print([str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))])
-    print(str(int(j / i * 100))+'%    '+'成功次数：'+str(j)+'    总次数：'+str(i))
-    i=i+1
