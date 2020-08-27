@@ -67,7 +67,7 @@ def main():
     options.add_argument('User-Agent=' + UserAgent)
     time_start=time.time()
     driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",options=options)
-    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_shenma.html')
+    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_sogou.html')
     #driver=webdriver.Chrome(options=options)
     updata_log = cjhkeywords.split("\n")
     url =updata_log[6].split("=")[1].split(",")
