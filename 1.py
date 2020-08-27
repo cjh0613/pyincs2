@@ -67,7 +67,7 @@ def main():
     options.add_argument('User-Agent=' + UserAgent)
     time_start=time.time()
     driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",options=options)
-    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_360.html')
+    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_yandex.html')
     #driver=webdriver.Chrome(options=options)
     updata_log = cjhkeywords.split("\n")
     url =updata_log[6].split("=")[1].split(",")
@@ -75,12 +75,12 @@ def main():
     #browser =driver
     if cjhkeywords=='':
         print('获取设置失败')
-        driver.quit()
         time.sleep(300)
+        driver.quit()
     elif updata_log[0].split("=")[1]=='0':
         print('关闭')
-        driver.quit()
         time.sleep(1800)
+        driver.quit()
     else:
 
         #driver.get("https://www.baidu.com/baidu?wd=宜昌八中官网&ie=utf-8")
