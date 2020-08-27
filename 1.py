@@ -1,24 +1,23 @@
-import selenium
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os
 import time
 import random
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-def CJHrandomS():
-    s1=random.choice(['宜昌','宜昌市','湖北省宜昌市','湖北宜昌','湖北省宜昌','湖北宜昌市','三峡大学'])
-    a1=random.choice(['','','','','','',' ','  '])
-    s2=random.choice(['八中','8中','八中','第八中学','第八中','三峡大学附属中学','三峡大学附中'])
-    a2=random.choice(['',' ',' ',' ','  '])
-    s3=random.choice(['','','','','','','官网','官方网站',])
-    s=s1+a1+s2+a2+s3
-    return s
-    
+import requests
+
+def getHTMLText(url):
+    try:
+        r = requests.get(url, timeout=30)
+        r.raise_for_status()
+        r.encoding = r.apparent_encoding
+        return r.text
+    except:
+        return ""
+
 def main():
     global j
     #try:
@@ -28,7 +27,7 @@ def main():
     #options.binary_location = r"D:\mypro\Panda_learning-32\chrome\chrome.exe"
     options.add_argument('--window-size=1920,1080')
     options.add_argument('--headless')
-    #options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
+    options.add_argument('log-level=3')#禁用打包的命令行界面大量日志信息滚动输出INFO = 0 WARNING = 1 LOG_ERROR = 2 LOG_FATAL = 3 default is 0
     options.add_argument('lang=zh_CN.UTF-8')
     u1=random.choice(['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
     # Opera
@@ -67,47 +66,67 @@ def main():
     UserAgent = u1
     options.add_argument('User-Agent=' + UserAgent)
     time_start=time.time()
-    driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",chrome_options=options)
+    driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",options=options)
+    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_baidu.html')
     #driver=webdriver.Chrome(options=options)
-    driver.get(random.choice(["http://www.baidu.com","https://www.baidu.com"]))
+    updata_log = cjhkeywords.split("\n")
+    url =updata_log[6].split("=")[1].split(",")
+    driver.get(random.choice(url))
     #browser =driver
-
-    #driver.get("https://www.baidu.com/baidu?wd=宜昌八中官网&ie=utf-8")
-    s1=random.choice(['维基百科','Github','无法','代理网站','Pandownload','搜索引擎','JS API','Panda-Learning','zmirror','hexo bilibili','Python','IDE','资源分享','转','Wikipedia','PyInstaller','3D打印','科学上网','解决方案',' javascript','转载','nodejs','文件自动处理','',])
-    a1=random.choice(['','','','','','','','',' ','  '])
-    s2=random.choice(['峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页','峡州仙士之页','峡州','峡州仙士','仙士','峡州仙士之页','峡州仙士 页',''])
-    a2=random.choice(['','',' ','','','','','','','','','','','','','','','','','','','','',' ',' ','  '])
-    s3=random.choice(['','','','','','','','','','','','','','','','','','','','','官网','官方网站',])
-    s=s1+a1+s2+a2+s3
-    # 获取输入框标签对象
-    element = driver.find_element_by_id('kw')
-    # 输入框输入内容
-    element.send_keys(s)
-    element.send_keys(Keys.ENTER)
-    condition = expected_conditions.visibility_of_element_located((By.XPATH, '//*/div[*]/a[contains(text(), "https://cjh0613.")]'))
-    try:
-        tag1=0
-        WebDriverWait(driver=driver, timeout=15, poll_frequency=1).until(condition)
-    except:
+    if cjhkeywords=='':
+        print('获取设置失败')
         driver.quit()
-        tag1=1
-    try:
-            
-        driver.find_element_by_xpath('//*/div[*]/a[contains(text(), "https://cjh0613.")]').click()
-        #driver.find_element_by_partial_link_text("https://cjh0613.").click()
-        print ('成功点击！！！——————test pass: element found by link text')
-        j=j+1
-        print([str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))])
-        print(str(int(j / i * 100))+'%    '+'成功次数：'+str(j)+'    总次数：'+str(i))
-        cjht=random.choice(['1125','1825','3000','1125','1825','3000','20','60'])
-        print('等待'+cjht)
-        time.sleep(int(cjht))
-        if tag1==0:
+        time.sleep(300)
+    elif updata_log[0].split("=")[1]=='0':
+        print('关闭')
+        driver.quit()
+        time.sleep(1800)
+    else:
+
+        #driver.get("https://www.baidu.com/baidu?wd=宜昌八中官网&ie=utf-8")
+        s1=random.choice(updata_log[1].split("=")[1].split(","))
+        a1=random.choice(updata_log[2].split("=")[1].split(","))
+        s2=random.choice(updata_log[3].split("=")[1].split(","))
+        a2=random.choice(updata_log[4].split("=")[1].split(","))
+        s3=random.choice(updata_log[5].split("=")[1].split(","))
+        s=s1+a1+s2+a2+s3
+        print(s)
+        # 获取输入框标签对象
+        search_input = updata_log[7].split("=")[1].split(",")[0]
+        if search_input=='id':
+            element = driver.find_element_by_id(updata_log[8].split("=")[1].split(",")[0])
+        else:
+            element = driver.find_element_by_xpath(updata_log[9].split("=")[1].split(",")[0])
+        # 输入框输入内容
+        element.send_keys(s)
+        element.send_keys(Keys.ENTER)
+        condition = expected_conditions.visibility_of_element_located((By.XPATH, updata_log[10].split("=")[1]))
+        print(updata_log[10].split("=")[1])
+        try:
+            tag1=0
+            WebDriverWait(driver=driver, timeout=15, poll_frequency=1).until(condition)
+            print('发现元素！')
+        except:
+            print('没有发现元素！')
             driver.quit()
-    except:
-        print ("Exception found")
-        if tag1==0:
-            driver.quit()
+            tag1=1
+        try:
+
+            driver.find_element_by_xpath(updata_log[11].split("=")[1]).click()
+            #driver.find_element_by_partial_link_text("https://cjh0613.").click()
+            print ('成功点击！！！——————test pass: element found by link text')
+            j=j+1
+            print([str(int((time.time()-time_start)/60))+':'+str(int((time.time()-time_start)%60))])
+            print(str(int(j / i * 100))+'%    '+'成功次数：'+str(j)+'    总次数：'+str(i))
+            cjht=random.choice(updata_log[12].split("=")[1].split(","))
+            print('等待'+cjht)
+            time.sleep(int(cjht))
+            if tag1==0:
+                driver.quit()
+        except:
+            print ("点击失败！")
+            if tag1==0:
+                driver.quit()
 #except:
     #print('fail')
     #driver.quit()
