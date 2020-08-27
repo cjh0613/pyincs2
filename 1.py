@@ -1,4 +1,4 @@
-
+#必应 峡州仙士之页
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -67,7 +67,7 @@ def main():
     options.add_argument('User-Agent=' + UserAgent)
     time_start=time.time()
     driver=webdriver.Chrome(executable_path="./chrome/chromedriver.exe",options=options)
-    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_baidu.html')
+    cjhkeywords=getHTMLText('https://0a.cjh0613.com/cjh0613_com_seo/keywords_bing.html')
     #driver=webdriver.Chrome(options=options)
     updata_log = cjhkeywords.split("\n")
     url =updata_log[6].split("=")[1].split(",")
