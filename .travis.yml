@@ -26,6 +26,7 @@ install:
   - export TZ='Asia/Shanghai'
   - git config --global user.name cjh0613
   - git config --global user.email cjhbruce@foxmail.com
+  - pip install requests
   - pip install selenium
   - pip install pyinstaller
 # command to run tests
