@@ -64,7 +64,7 @@ parse==1.14.0
 parsel==1.5.2
 passlib==1.7.2
 pefile==2019.4.18
-Pillow==7.0.0
+Pillow==7.1.0
 progress==1.5
 Protego==0.1.16
 protobuf==3.10.0
